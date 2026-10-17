@@ -179,7 +179,8 @@ def sens_cifar(recs5, e2):
     with open(f"{T}/tab_sens_cifar.tex", "w") as f:
         for lab, m, s, ep, rc, k, dv in rows:
             es = "--" if np.isnan(ep) else f"{ep:.1f}" + ("" if rc == k else f"$^{{{rc}/{k}}}$")
-            f.write(f"{lab} & {m:.2f} $\\pm$ {s:.2f}{'$^\\dagger$' if dv else ''} & {es} \\\\\n")
+            dag = "$^\\dagger$" if dv else ""
+            f.write(f"{lab} & {m:.2f} $\\pm$ {s:.2f}{dag} & {es} \\\\\n")
     return rows
 
 
