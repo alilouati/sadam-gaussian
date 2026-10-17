@@ -7,6 +7,18 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.figure as _mfig
+_orig_savefig = _mfig.Figure.savefig
+
+
+def _savefig_pdf_and_png(self, fname, *a, **k):
+    """Save the PDF used in the paper and a PNG preview next to it (for notebooks and the README)."""
+    _orig_savefig(self, fname, *a, **k)
+    if str(fname).endswith(".pdf"):
+        _orig_savefig(self, str(fname)[:-4] + ".png", dpi=130)
+
+
+_mfig.Figure.savefig = _savefig_pdf_and_png
 sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
 import npanalyze as A
 

@@ -1,6 +1,7 @@
 # SADAM: Gaussian moment-state initialization for Adam
 
 ![tests](https://github.com/alilouati/sadam-gaussian/actions/workflows/tests.yml/badge.svg)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/alilouati/sadam-gaussian/blob/main/SADAM_demo.ipynb)
 
 Code, raw logs, figures, and tests for the paper
 **"Gaussian-Based Moment-State Initialization for Adaptive Optimization in Machine Learning"**
@@ -14,7 +15,13 @@ coordinate-wise learning-rate warm-up whose length depends on σv relative to th
 All experiments use a NumPy implementation (float32, explicit backward passes checked against
 finite differences) and run on a CPU; no deep-learning framework is needed.
 
-## Quick start
+## Run it in the browser (Google Colab)
+Click **Open in Colab** above, then **Runtime → Run all** (about 3–5 minutes, CPU is enough). The notebook
+installs the code, runs the test suite, shows SADAM's implicit warm-up, regenerates all tables and figures of the
+paper from the raw logs, lets you train Adam and SADAM with your own σm and σv, and re-runs real MNIST training
+for comparison with the logged results.
+
+## Quick start (local)
 ```bash
 git clone https://github.com/alilouati/sadam-gaussian.git
 cd sadam-gaussian
@@ -58,6 +65,7 @@ logged values exactly. The data location can be changed with `SADAM_DATA`.
 | `code/theory_and_digits/` | Monte Carlo checks of the propositions; 500-run UCI-digits sensitivity study |
 | `results/` | raw per-run JSON logs (E1 MNIST/MLP, E2 CIFAR-10/CNN, E3 CIFAR-10/ResNet-8, E5 sensitivity, digits) |
 | `figures/`, `tables/` | the figures and tables as they appear in the paper |
+| `SADAM_demo.ipynb` | Colab notebook: run, test and reproduce |
 | `tests/` | test suite (also run automatically by GitHub Actions on every push) |
 
 Paired design: for a given seed every optimizer starts from the same weights and sees the same
