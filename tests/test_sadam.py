@@ -89,7 +89,8 @@ def test_optimizer_reduces_loss(name):
 # ---------------------------------------------------------------- the paper's tables are reproduced from the logs
 def test_tables_regenerated_from_logs_match_paper():
     for script in ("npanalyze.py", os.path.join("theory_and_digits", "digits_report.py")):
-        subprocess.run([sys.executable, script], cwd=CODE, capture_output=True, check=True)
+        r = subprocess.run([sys.executable, script], cwd=CODE, capture_output=True, text=True)
+        assert r.returncode == 0, f"{script} failed:\n{r.stderr[-3000:]}"
     gen = os.path.join(ROOT, "outputs", "tables")
     for f in sorted(os.listdir(os.path.join(ROOT, "tables"))):
         assert filecmp.cmp(os.path.join(gen, f), os.path.join(ROOT, "tables", f), shallow=False), f
